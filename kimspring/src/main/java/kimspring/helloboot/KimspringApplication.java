@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,10 +18,23 @@ import org.springframework.http.MediaType;
 public class KimspringApplication {
 
 	public static void main(String[] args) {
+		//스프링 컨테이너
+		//객체의 생성과 소멸, 일련의 생애주기를 관리한다.
+		GenericApplicationContext applicationContext = new GenericApplicationContext();
+		applicationContext.registerBean(HelloController.class);
+		//모든 구성 정보 설정 등을 다 등록 후 이를 이용해 초기화하는 작업이 아래 메서드
+		applicationContext.refresh();
+		
+		/* 스프링 컨테이너는 주로 클래스 메타 정보를 이용해 객체를 생성하는 방식을 취한다.
+		 * 물론 객체를 직접 생성해 등록도 가능하다.
+		 */
+		
 		ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
 		WebServer webServer = serverFactory.getWebServer(servletContext ->{
-			//로직 분리를 위한 뒷 단 컨트롤러
-			HelloController helloController = new HelloController();
+			//이제 스프링 컨테이너의 빈으로 등록된다.
+//			HelloController helloController = new HelloController();
+			//스프링 컨테이너에서 빈 정보를 가져온다. 이제 객체를 어떻게 생성할지는 신경 안쓴다. 단순히 필요하니까 가져다 쓴다.
+			HelloController helloController = applicationContext.getBean(HelloController.class);
 			
 			servletContext.addServlet("frontController", new HttpServlet() {
 				@Override
