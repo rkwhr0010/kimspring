@@ -19,6 +19,9 @@ public class KimspringApplication {
 	public static void main(String[] args) {
 		ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
 		WebServer webServer = serverFactory.getWebServer(servletContext ->{
+			//로직 분리를 위한 뒷 단 컨트롤러
+			HelloController helloController = new HelloController();
+			
 			servletContext.addServlet("frontController", new HttpServlet() {
 				@Override
 				protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -26,15 +29,17 @@ public class KimspringApplication {
 					// 중앙화 됐기에 모든 요청은 이 서블릿을 커친다.
 					// 인증, 보안, 다국어처리, 공통 기능을 넣기 용이 
 					
-					// 모든 URI를 다 받기에 별도로 분기처리가 필요하다.
+					// HTTP요청 매핑
 					if(req.getRequestURI().equals("/hello")&&req.getMethod().equals(HttpMethod.GET.name())) {
-						resp.setStatus(HttpStatus.OK.value());	//상태코드
-//						resp.addHeader("Content-Type",MediaType.TEXT_PLAIN_VALUE);
-						resp.setContentType(MediaType.TEXT_PLAIN_VALUE);//헤더(주로 미디어타입)
-						//로직이라고 가정
-						String name = req.getParameter("name");
 						
-						resp.getWriter().println("Hello SpringBoot "+ name);
+						//웹 요청에서 정보를 추출하고, 의미있는 오브젝트에 담아서 전달하는 작업을 바인딩이라 한다.
+						String name = req.getParameter("name");
+						String ret = helloController.hello(name);
+						
+						//3가지 요소(상태 코드, 헤더, 바디)
+						resp.setStatus(HttpStatus.OK.value());	//상태코드
+						resp.setContentType(MediaType.TEXT_PLAIN_VALUE);//헤더
+						resp.getWriter().println(ret);//바디
 						
 					}else {
 						resp.setStatus(HttpStatus.NOT_FOUND.value());

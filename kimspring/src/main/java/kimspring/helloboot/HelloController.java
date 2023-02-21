@@ -1,11 +1,7 @@
 package kimspring.helloboot;
+//스프링 없던 시절이라 생각하고 시작(어노테이션제거)
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
 public class HelloController {
-	@GetMapping("/hello")
 	public String hello (String name) {
 		return "Hello "+name;
 	}
