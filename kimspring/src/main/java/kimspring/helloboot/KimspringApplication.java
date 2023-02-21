@@ -22,6 +22,8 @@ public class KimspringApplication {
 		//객체의 생성과 소멸, 일련의 생애주기를 관리한다.
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
 		applicationContext.registerBean(HelloController.class);
+		//코드 레벨에서는 인터페이스로 다루지만, 스프링 구성정보는 정확한 클래스 타입이 필요하다.
+		applicationContext.registerBean(SimpleHelloService.class);
 		//모든 구성 정보 설정 등을 다 등록 후 이를 이용해 초기화하는 작업이 아래 메서드
 		applicationContext.refresh();
 		
