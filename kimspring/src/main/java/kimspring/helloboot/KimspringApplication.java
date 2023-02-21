@@ -31,7 +31,11 @@ public class KimspringApplication {
 						resp.setStatus(HttpStatus.OK.value());	//상태코드
 //						resp.addHeader("Content-Type",MediaType.TEXT_PLAIN_VALUE);
 						resp.setContentType(MediaType.TEXT_PLAIN_VALUE);//헤더(주로 미디어타입)
-						resp.getWriter().println("Hello SpringBoot");
+						//로직이라고 가정
+						String name = req.getParameter("name");
+						
+						resp.getWriter().println("Hello SpringBoot "+ name);
+						
 					}else {
 						resp.setStatus(HttpStatus.NOT_FOUND.value());
 					}
