@@ -2,18 +2,32 @@ package kimspring.helloboot;
 
 import java.util.Objects;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * 디스패처 서블릿은 빈으로 등록된 객체 중 RequestMapping을 가진 빈을 탐색해
+ * 매핑 테이블을 만들어, 사용한다. 이때 클래스 레벨에 RequestMapping을 탐색해
+ * 만들기 때문에 메서드 레벨에만 붙이면 매핑 테이블에 등록이 안된다.
+ */
+@RequestMapping
 public class HelloController {
-	//생성자 주입을 받을 때 가급적 private final을 생활화하자
 	private final HelloService helloService;
-	//스프링 컨테이너가 해당 인터페이스 타입을 구현한 클래스가 있으면 자동으로 의존 주입해준다.
+	
 	public HelloController(HelloService helloService) {
 		super();
 		this.helloService = helloService;
 	}
+	@GetMapping("/hello")
+	@ResponseBody
 	public String hello (String name) {
-		//컨트롤러는 데이터 검증만 수행
-//		return "Hello "+name;
-		//로직을 서비스로 위임
 		return helloService.sayHello(Objects.requireNonNull(name));
+	}
+	@PostMapping("/hello")
+	@ResponseBody
+	public String hello2 (String name) {
+		return helloService.sayHello("POST"+Objects.requireNonNull(name));
 	}
 }

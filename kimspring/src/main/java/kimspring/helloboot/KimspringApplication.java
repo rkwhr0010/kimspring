@@ -17,7 +17,7 @@ public class KimspringApplication {
 		
 		ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
 		WebServer webServer = serverFactory.getWebServer(servletContext ->{
-			servletContext.addServlet("frontController", 
+			servletContext.addServlet("dispatcherServlet", 
 					new DispatcherServlet(applicationContext)
 					).addMapping("/*"); 
 		});
