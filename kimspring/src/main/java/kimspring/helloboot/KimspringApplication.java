@@ -13,6 +13,16 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ComponentScan
 public class KimspringApplication {
 	
+	@Bean
+	public ServletWebServerFactory servletWebServerFactory() {
+		return new TomcatServletWebServerFactory();
+	}
+	
+	@Bean 
+	public DispatcherServlet dispatcherServlet() {
+		return new DispatcherServlet();
+	}
+	
 	public static void main(String[] args) {
 		//스프링 컨테이너
 		AnnotationConfigServletWebApplicationContext applicationContext = 
@@ -20,11 +30,16 @@ public class KimspringApplication {
 			@Override
 			protected void onRefresh() {
 				super.onRefresh();
-				ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+				
+				ServletWebServerFactory serverFactory = this.getBean(ServletWebServerFactory.class);
+				DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
+				
+//				dispatcherServlet.setApplicationContext(this);
+				//스프링 컨테이너가 자동으로 등록해준다. , ApplicationContextAware 이용
+				
 				WebServer webServer = serverFactory.getWebServer(servletContext ->{
-					servletContext.addServlet("dispatcherServlet", 
-							new DispatcherServlet(this)
-							).addMapping("/*"); 
+					servletContext.addServlet("dispatcherServlet", dispatcherServlet)
+						.addMapping("/*"); 
 				});
 				webServer.start();
 			}

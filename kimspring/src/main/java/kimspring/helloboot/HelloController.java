@@ -2,6 +2,9 @@ package kimspring.helloboot;
 
 import java.util.Objects;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
  * 만들기 때문에 메서드 레벨에만 붙이면 매핑 테이블에 등록이 안된다.
  */
 @RestController
-//@ResponseBody
-//@Component
-//@RequestMapping
 public class HelloController {
 	private final HelloService helloService;
+	private final ApplicationContext applicationContext;
 	
-	public HelloController(HelloService helloService) {
+	public HelloController(HelloService helloService, ApplicationContext applicationContext) {
 		super();
+		this.applicationContext = applicationContext;
 		this.helloService = helloService;
 	}
 	@GetMapping("/hello")
