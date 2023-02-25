@@ -17,7 +17,7 @@ public class HelloApiTest {
 		//HTTP 3요소 검증, 상태코드,헤더,바디
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(entity.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
-		assertThat(entity.getBody()).isEqualTo("Hello boot");
+		assertThat(entity.getBody()).isEqualTo("*Hello boot*");
 	}
 	@Test
 	void helloApi2() {
