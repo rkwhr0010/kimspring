@@ -1,4 +1,4 @@
-package kimspring.helloboot;
+package kimspring.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Target(ElementType.TYPE)
 @Configuration
 @ComponentScan
-public @interface MySpringBootAnnotation {
+@MyEnableAutoConfiguration
+public @interface MySpringBootApplication {
 
 }
