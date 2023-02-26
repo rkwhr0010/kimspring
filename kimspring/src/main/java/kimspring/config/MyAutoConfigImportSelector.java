@@ -16,8 +16,9 @@ public class MyAutoConfigImportSelector implements DeferredImportSelector{
 	
 	@Override
 	public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+		ImportCandidates load = ImportCandidates.load(MyAutoConfiguration.class, classLoader);
 		return StreamSupport
-				.stream(ImportCandidates.load(MyAutoConfiguration.class, classLoader).spliterator(), false)
+				.stream(load.spliterator(), false)
 				.toArray(String[]::new);
 	}
 }
