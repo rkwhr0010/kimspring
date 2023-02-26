@@ -7,12 +7,9 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
-import kimspring.config.autoconfig.DispatcherServletConfig;
-import kimspring.config.autoconfig.TomcatServletWebServerConfig;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import({DispatcherServletConfig.class, TomcatServletWebServerConfig.class})
+@Import(MyAutoConfigImportSelector.class)
 public @interface MyEnableAutoConfiguration {
 
 }
