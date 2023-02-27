@@ -1,2 +1,3 @@
+kimspring.config.autoconfig.JettyServletWebServerConfig
 kimspring.config.autoconfig.TomcatServletWebServerConfig
 kimspring.config.autoconfig.DispatcherServletConfig
