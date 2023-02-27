@@ -13,6 +13,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @MyEnableAutoConfiguration
-public @interface MySpringBootApplication {
-
-}
+public @interface MySpringBootApplication {}

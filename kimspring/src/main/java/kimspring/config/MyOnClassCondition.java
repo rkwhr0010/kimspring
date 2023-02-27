@@ -7,8 +7,6 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.ClassUtils;
 
-import kimspring.config.autoconfig.ConditionalMyOnClass;
-
 public class MyOnClassCondition implements Condition{
 	@Override
 	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
@@ -17,5 +15,4 @@ public class MyOnClassCondition implements Condition{
 		String value = (String) attributes.get("value");
 		return ClassUtils.isPresent(value, context.getClassLoader());
 	}
-
 }
