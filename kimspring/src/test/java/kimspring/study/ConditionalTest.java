@@ -1,7 +1,6 @@
 package kimspring.study;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -91,5 +90,4 @@ public class ConditionalTest {
 			return value;
 		}
 	}
-	
 }

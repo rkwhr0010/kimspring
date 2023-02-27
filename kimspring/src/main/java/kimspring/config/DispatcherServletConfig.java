@@ -1,9 +1,7 @@
-package kimspring.config.autoconfig;
+package kimspring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
-
-import kimspring.config.MyAutoConfiguration;
 
 @MyAutoConfiguration
 public class DispatcherServletConfig {
