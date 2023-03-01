@@ -1,3 +1,4 @@
+kimspring.config.autoconfig.PropertyPlaceholderConfig
 kimspring.config.autoconfig.UndertowServletWebServerConfig
 kimspring.config.autoconfig.JettyServletWebServerConfig
 kimspring.config.autoconfig.TomcatServletWebServerConfig
