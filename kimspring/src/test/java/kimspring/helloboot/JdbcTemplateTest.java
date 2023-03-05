@@ -16,20 +16,20 @@ public class JdbcTemplateTest {
 	@Autowired JdbcTemplate jdbcTemplate;
 	@BeforeEach
 	void init() {
-		jdbcTemplate.execute("create table if not exists member(name varchar(50) primary key, count int)");
+		jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)");
 	}
 	@Test
 	void insertAndQuery() {
-		jdbcTemplate.update("insert into member values(?,?)","kim",3);
-		jdbcTemplate.update("insert into member values(?,?)","Spring",1);
+		jdbcTemplate.update("insert into hello values(?,?)","Kim",3);
+		jdbcTemplate.update("insert into hello values(?,?)","Spring",1);
 		
 		Long count = jdbcTemplate.queryForObject("select count(1) from member", Long.class);
 		assertThat(count).isEqualTo(2);
 	}
 	@Test
 	void insertAndQuery2() {
-		jdbcTemplate.update("insert into member values(?,?)","kim",3);
-		jdbcTemplate.update("insert into member values(?,?)","Spring",1);
+		jdbcTemplate.update("insert into hello values(?,?)","Kim",3);
+		jdbcTemplate.update("insert into hello values(?,?)","Spring",1);
 		
 		Long count = jdbcTemplate.queryForObject("select count(1) from member", Long.class);
 		assertThat(count).isEqualTo(2);
