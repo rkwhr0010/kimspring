@@ -6,18 +6,13 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
-//스프링 컨테이너 구동
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = KimspringApplication.class)
-//프로퍼티 파일을 스프링부트만의 확장 기능이다. 따라서 위 설정만으론 설정파일을 읽을 수 없다.
-//그래서 추가로 아래와 같은 설정이 필요하다.
-@TestPropertySource("classpath:/application.properties")
+@HelloBootTest
+//DB 관련 테스트는 테스트 실행 후 그 결과가 그 다음 테스트에 영향을 미칠 수 있다.
+//그래서 트랜잭션 어노테이션을 붙여 롤백시켜 테스트 실행 전으로 돌린다.
+@Transactional
 public class DataSourceTest {
 	@Autowired
 	DataSource dataSource;
