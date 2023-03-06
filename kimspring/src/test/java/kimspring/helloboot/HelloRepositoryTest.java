@@ -2,7 +2,6 @@ package kimspring.helloboot;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +15,7 @@ public class HelloRepositoryTest {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	@BeforeEach
+//	@BeforeEach // 어플리케이션 main에 @PostConstruct에 설정
 	void init() {
 		jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)");
 	}
