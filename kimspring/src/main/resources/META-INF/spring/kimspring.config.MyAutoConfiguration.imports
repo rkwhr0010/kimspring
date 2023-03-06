@@ -1,7 +1,0 @@
-kimspring.config.autoconfig.DataSourceConfig
-kimspring.config.autoconfig.PropertyPostProcessorConfig
-kimspring.config.autoconfig.PropertyPlaceholderConfig
-kimspring.config.autoconfig.UndertowServletWebServerConfig
-kimspring.config.autoconfig.JettyServletWebServerConfig
-kimspring.config.autoconfig.TomcatServletWebServerConfig
-kimspring.config.autoconfig.DispatcherServletConfig

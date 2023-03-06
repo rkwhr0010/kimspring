@@ -5,13 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-@HelloBootTest
-@Transactional
-//@Rollback(false)
+
+@JdbcTest
 public class JdbcTemplateTest {
 	@Autowired JdbcTemplate jdbcTemplate;
 	@BeforeEach
@@ -23,7 +23,7 @@ public class JdbcTemplateTest {
 		jdbcTemplate.update("insert into hello values(?,?)","Kim",3);
 		jdbcTemplate.update("insert into hello values(?,?)","Spring",1);
 		
-		Long count = jdbcTemplate.queryForObject("select count(1) from member", Long.class);
+		Long count = jdbcTemplate.queryForObject("select count(1) from hello", Long.class);
 		assertThat(count).isEqualTo(2);
 	}
 	@Test
@@ -31,7 +31,7 @@ public class JdbcTemplateTest {
 		jdbcTemplate.update("insert into hello values(?,?)","Kim",3);
 		jdbcTemplate.update("insert into hello values(?,?)","Spring",1);
 		
-		Long count = jdbcTemplate.queryForObject("select count(1) from member", Long.class);
+		Long count = jdbcTemplate.queryForObject("select count(1) from hello", Long.class);
 		assertThat(count).isEqualTo(2);
 	}
 }
