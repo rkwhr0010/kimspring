@@ -1,8 +1,11 @@
 package kimspring.helloboot;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 디스패처 서블릿은 빈으로 등록된 객체 중 RequestMapping을 가진 빈을 탐색해
@@ -31,6 +34,15 @@ public class HelloController {
 	@GetMapping("/count")
 	public String count(String name) {
 		return "count : "+helloService.countOf(name);
+	}
+	
+	@GetMapping("/test")
+	public String newIntance(ObjectMapper mapper) {
+		ObjectMapper mapper2 = new ObjectMapper();
+		System.out.println(mapper);
+		System.out.println(mapper2);
+		
+		return mapper.equals(mapper2)+"";
 	}
 	
 }
